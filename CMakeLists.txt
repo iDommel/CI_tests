@@ -12,12 +12,16 @@ target_sources(${PROJECT_NAME}
         main.cpp
 )
 
+# Set default compile flags for GCC
+if(CMAKE_COMPILER_IS_GNUCXX)
+    message(STATUS "GCC detected, adding compile flags")
+    target_compile_options(${PROJECT_NAME}
+        PRIVATE
+            -Wall
+            -Wextra
+    )
+endif(CMAKE_COMPILER_IS_GNUCXX)
 
-target_compile_options(${PROJECT_NAME}
-    PRIVATE
-        -Wall
-        -Wextra
-)
 
 set_target_properties(
     ${PROJECT_NAME} PROPERTIES

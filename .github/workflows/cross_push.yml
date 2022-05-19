@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: pandoc/latex
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install mustache (to update the date)
+        run:  apk add ruby && gem install mustache
+      - name: creates output
+        run:  sh ./build.sh
+      - name: Pushes to another repository
+        id: push_directory
+        uses: cpina/github-action-push-to-another-repository@devel
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: output/
+          destination-github-username: 'EpitechPromo2025'
+          destination-repository-name: 'B-DOP-400-TLS-4-1-bsmymarvin-iona.dommel-prioux'
+          user-email: iona.dommel-prioux@epitech.eu
+          commit-message: See ORIGIN_COMMIT from $GITHUB_REF
+          target-branch: main
+      - name: Test get variable exported by push-to-another-repository
+        run: echo $DESTINATION_CLONED_DIRECTORY
+
+    # - uses: cpina/github-action-push-to-another-repository@main
+    # - name: Pushes to another repository
+    #   env:
+    #     API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+    #   with:
+    #     source-directory: 'output'
+    #     destination-github-username: ''
+    #     destination-repository-name: ''
+    #     user-email:
+    #     target-branch: main
+    #     run: echo $DESTINATION_CLONED_DIRECTORY

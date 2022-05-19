@@ -19,8 +19,8 @@ jobs:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
           source-directory: .
-          destination-github-username: 'iDommel'
-          destination-repository-name: 'CI_test_output'
+          destination-github-username: 'EpitechPromo2025'
+          destination-repository-name: 'B-DOP-400-TLS-4-1-bsmymarvin-iona.dommel-prioux'
           user-email: iona.dommel-prioux@epitech.eu
           commit-message: Yup yup
           target-branch: main

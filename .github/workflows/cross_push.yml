@@ -1,4 +1,4 @@
-name: CI
+name: Push to EPITECH repository
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: fedora-latest
     container: pandoc/latex
     steps:
       - uses: actions/checkout@v2
@@ -22,17 +22,5 @@ jobs:
           destination-github-username: 'EpitechPromo2025'
           destination-repository-name: 'B-DOP-400-TLS-4-1-bsmymarvin-iona.dommel-prioux'
           user-email: iona.dommel-prioux@epitech.eu
-          commit-message: Yup yup
+          commit-message: See ORIGIN_COMMIT from $GITHUB_REF
           target-branch: main
-
-    # - uses: cpina/github-action-push-to-another-repository@main
-    # - name: Pushes to another repository
-    #   env:
-    #     API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-    #   with:
-    #     source-directory: 'output'
-    #     destination-github-username: ''
-    #     destination-repository-name: ''
-    #     user-email:
-    #     target-branch: main
-    #     run: echo $DESTINATION_CLONED_DIRECTORY

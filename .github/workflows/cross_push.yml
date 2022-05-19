@@ -12,22 +12,18 @@ jobs:
     container: pandoc/latex
     steps:
       - uses: actions/checkout@v2
-      - name: Install mustache (to update the date)
-        run:  apk add ruby && gem install mustache
       - name: Pushes to another repository
         id: push_directory
         uses: cpina/github-action-push-to-another-repository@devel
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          source-directory: output/
+          source-directory: .
           destination-github-username: 'iDommel'
           destination-repository-name: 'CI_test_output'
           user-email: iona.dommel-prioux@epitech.eu
-          commit-message: See ORIGIN_COMMIT from $GITHUB_REF
+          commit-message: Yup yup
           target-branch: main
-      - name: Test get variable exported by push-to-another-repository
-        run: echo $DESTINATION_CLONED_DIRECTORY
 
     # - uses: cpina/github-action-push-to-another-repository@main
     # - name: Pushes to another repository
